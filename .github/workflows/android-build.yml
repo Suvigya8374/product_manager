@@ -1,0 +1,33 @@
+name: Build Kivy APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            zip unzip openjdk-17-jdk \
+            python3-pip python3-setuptools git \
+            build-essential autoconf libtool \
+            pkg-config zlib1g-dev libncurses5
+
+          pip install --upgrade cython==0.29.33 virtualenv buildozer
+
+      - name: Initialize and Build APK
+        run: |
+          buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: productmanager-apk
+          path: bin/*.apk
