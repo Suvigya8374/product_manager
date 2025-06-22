@@ -8,13 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     env:
       ANDROID_HOME: $HOME/android-sdk
       PATH: $HOME/android-sdk/cmdline-tools/tools/bin:$HOME/android-sdk/platform-tools:$PATH
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Set up Python
@@ -22,11 +21,11 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install system dependencies
+    - name: Install system dependencies (includes tar)
       run: |
         sudo apt-get update
         sudo apt-get install -y \
-          zip unzip openjdk-17-jdk python3-pip build-essential \
+          zip unzip tar openjdk-17-jdk python3-pip build-essential \
           autoconf libtool pkg-config zlib1g-dev libncurses5-dev
 
     - name: Install Python dependencies
@@ -42,16 +41,17 @@ jobs:
         unzip tools.zip
         mv cmdline-tools tools
 
-    - name: Accept licenses and install SDK components
+    - name: Accept licenses and install SDK packages
       run: |
-        sdkmanager --licenses || true
-        sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0"
+        sdkmanager --sdk_root=${ANDROID_HOME} --licenses || true
+        sdkmanager --sdk_root=${ANDROID_HOME} \
+          "platform-tools" "platforms;android-31" "build-tools;31.0.0"
 
-    - name: Build APK
+    - name: Build APK with Buildozer
       run: |
         buildozer android debug
 
-    - name: Upload APK
+    - name: Upload built APK
       uses: actions/upload-artifact@v4
       with:
         name: kivy-apk
