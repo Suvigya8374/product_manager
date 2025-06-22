@@ -2,44 +2,43 @@ name: Build Kivy APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential ccache libffi-dev libssl-dev \
-            libsqlite3-dev zlib1g-dev libncurses5-dev libncursesw5-dev \
-            libreadline6-dev libgdbm-dev libbz2-dev libexpat1-dev \
-            liblzma-dev libffi-dev libjpeg-dev libfreetype6-dev \
-            openjdk-17-jdk git zip unzip
-          pip install --upgrade pip
-          pip install buildozer cython==0.29.33
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y zip unzip openjdk-17-jdk python3-pip python3-setuptools python3-wheel
+        pip install --upgrade pip
+        pip install buildozer cython==0.29.36
 
-      - name: Create .buildozer directory
-        run: mkdir -p .buildozer
+    - name: Install Android SDK and Buildozer requirements
+      run: |
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        yes | sdkmanager --licenses
+        sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0" "cmdline-tools;latest"
 
-      - name: Build APK
-        run: |
-          buildozer init || true
-          buildozer -v android debug
+    - name: Initialize Buildozer
+      run: buildozer init || true
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: kivy-apk
-          path: bin/*.apk
+    - name: Build APK
+      run: buildozer -v android debug
 
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: kivy-apk
+        path: bin/*.apk
