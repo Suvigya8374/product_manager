@@ -24,23 +24,28 @@ jobs:
         pip install --upgrade pip
         pip install buildozer cython==0.29.36
 
-    - name: Download Android SDK Command-line Tools
+    - name: Download Android SDK Command Line Tools
       run: |
-        mkdir -p "$HOME/android-sdk/cmdline-tools"
-        cd "$HOME/android-sdk/cmdline-tools"
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        cd $HOME/android-sdk/cmdline-tools
         curl -o tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
-        unzip tools.zip -d latest
-        export PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$PATH
+        unzip tools.zip
+        mv cmdline-tools latest
 
-        yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-        $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager \
-          "platform-tools" "platforms;android-31" "build-tools;31.0.0"
+    - name: Install Android SDK Packages
+      env:
+        ANDROID_HOME: $HOME/android-sdk
+      run: |
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+        yes | sdkmanager --licenses
+        sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0"
 
     - name: Build APK
+      env:
+        ANDROID_HOME: $HOME/android-sdk
       run: |
-        export ANDROID_HOME=$HOME/android-sdk
         export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-        buildozer -v android debug
+        buildozer android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
