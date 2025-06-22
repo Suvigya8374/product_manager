@@ -13,15 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install tar and unzip (required for SDK tools)
+    - name: Install system dependencies (including tar)
       run: |
         sudo apt-get update
-        sudo apt-get install -y tar unzip curl
-
-    - name: Install Java and Python build dependencies
-      run: |
-        sudo apt-get install -y openjdk-17-jdk python3-pip build-essential \
-          autoconf libtool pkg-config zlib1g-dev libncurses5-dev
+        sudo apt-get install -y tar unzip curl zip openjdk-17-jdk \
+          python3-pip build-essential autoconf libtool pkg-config \
+          zlib1g-dev libncurses5-dev
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -41,13 +38,10 @@ jobs:
         unzip tools.zip
         mv cmdline-tools tools
 
-    - name: Accept licenses and install Android SDK packages
-      env:
-        ANDROID_HOME: $HOME/android-sdk
-        PATH: $HOME/android-sdk/cmdline-tools/tools/bin:$PATH
+    - name: Accept licenses and install SDK packages
       run: |
-        sdkmanager --sdk_root=${ANDROID_HOME} --licenses || true
-        sdkmanager --sdk_root=${ANDROID_HOME} \
+        $HOME/android-sdk/cmdline-tools/tools/bin/sdkmanager --sdk_root=$HOME/android-sdk --licenses || true
+        $HOME/android-sdk/cmdline-tools/tools/bin/sdkmanager --sdk_root=$HOME/android-sdk \
           "platform-tools" "platforms;android-31" "build-tools;31.0.0"
 
     - name: Build APK
