@@ -1,0 +1,123 @@
+<EditScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(25)
+        spacing: dp(20)
+        canvas.before:
+            Color:
+                rgba: 0.97, 0.98, 0.98, 1  # Off-White background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Edit Fields"
+            font_size: '24sp'
+            size_hint_y: None
+            height: dp(50)
+            color: 0.29, 0.40, 0.53, 1  # Soft Blue
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(12)
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: "Message"
+                    size_hint_x: None
+                    width: dp(100)
+                    color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                TextInput:
+                    id: message_input
+                    hint_text: 'Message'
+                    background_color: 0.91, 0.93, 0.94, 1  # Light Grey
+                    foreground_color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    multiline: False
+                    padding: dp(10)
+                    size_hint_x: 1
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: "Expiry Date"
+                    size_hint_x: None
+                    width: dp(100)
+                    color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                TextInput:
+                    id: expiry_date_input
+                    hint_text: 'Expiry Date'
+                    background_color: 0.91, 0.93, 0.94, 1
+                    foreground_color: 0.22, 0.28, 0.31, 1
+                    multiline: False
+                    padding: dp(10)
+                    size_hint_x: 1
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: "Trade Date"
+                    size_hint_x: None
+                    width: dp(100)
+                    color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                TextInput:
+                    id: trade_date_input
+                    hint_text: 'Trade Date'
+                    background_color: 0.91, 0.93, 0.94, 1
+                    foreground_color: 0.22, 0.28, 0.31, 1
+                    multiline: False
+                    padding: dp(10)
+                    size_hint_x: 1
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: "System Date"
+                    size_hint_x: None
+                    width: dp(100)
+                    color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                TextInput:
+                    id: system_date_input
+                    hint_text: 'System Date'
+                    background_color: 0.91, 0.93, 0.94, 1
+                    foreground_color: 0.22, 0.28, 0.31, 1
+                    multiline: False
+                    padding: dp(10)
+                    size_hint_x: 1
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: "API"
+                    size_hint_x: None
+                    width: dp(100)
+                    color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                TextInput:
+                    id: api_input
+                    hint_text: 'API'
+                    background_color: 0.91, 0.93, 0.94, 1
+                    foreground_color: 0.22, 0.28, 0.31, 1
+                    multiline: False
+                    padding: dp(10)
+                    size_hint_x: 1
+
+        Widget:  # Pushes button to bottom
+            size_hint_y: 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(10)
+            Button:
+                text: 'Submit Entry'
+                font_size: '16sp'
+                background_normal: ''
+                background_color: 0.48, 0.60, 0.58, 1  # Muted Green
+                color: 1, 1, 1, 1
+                on_release: 
+                    app.root.get_screen('edit').submit_entry()

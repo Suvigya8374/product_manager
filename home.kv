@@ -1,0 +1,76 @@
+<HomeScreen>:
+    name: 'home'
+
+    canvas.before:
+        Color:
+            rgba: 0.97, 0.98, 0.98, 1  # Off-White Background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(25)
+        spacing: dp(20)
+
+        Label:
+            text: "Edit an Entry"
+            font_size: '24sp'
+            size_hint_y: None
+            height: dp(50)
+            color: 1, 1, 1, 1  # White text
+
+        Widget:
+            size_hint_y: None
+            height: dp(10)
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(15)
+            size_hint_y: None
+            height: dp(130)
+
+            Spinner:
+                id: company_spinner
+                text: "Select Company"
+                values: root.company_names
+                background_color: 0.91, 0.93, 0.94, 1  # Light Grey
+                color: 1, 1, 1, 1  # White text
+                size_hint_y: None
+                height: dp(50)
+
+            Spinner:
+                id: product_spinner
+                text: "Select Product"
+                values: root.product_names
+                background_color: 0.91, 0.93, 0.94, 1
+                color: 1, 1, 1, 1  # White text
+                size_hint_y: None
+                height: dp(50)
+
+        Widget:  # Pushes buttons to the bottom
+            size_hint_y: 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            spacing: dp(20)
+            padding: dp(10), dp(10)
+
+            Button:
+                text: "Add"
+                font_size: '16sp'
+                background_normal: ''
+                background_color: 0.84, 0.80, 0.78, 1  # Pale Taupe
+                color: 1, 1, 1, 1
+                on_release: app.root.current = 'add'  # Navigate to Add Screen
+
+            Button:
+                text: "Find"
+                font_size: '16sp'
+                background_normal: ''
+                background_color: 0.48, 0.60, 0.58, 1  # Muted Green
+                color: 1, 1, 1, 1
+                on_release: 
+                    app.root.get_screen('edit').find_entry()
+                    app.root.current = 'edit'

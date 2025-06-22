@@ -1,0 +1,231 @@
+<AddScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(15)  # Reduced from dp(25) to save space
+        spacing: dp(10)  # Reduced from dp(20) to save space
+        canvas.before:
+            Color:
+                rgba: 0.97, 0.98, 0.98, 1  # Off-White background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Add New Entry"
+            font_size: '24sp'
+            size_hint_y: None
+            height: dp(40)  # Reduced from dp(50) to save space
+            color: 0.29, 0.40, 0.53, 1  # Soft Blue
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint_y: 6  # Increased to 90% of 700px (630px)
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: dp(8)  # Reduced from dp(12) to save space
+                size_hint_y: None
+                height: self.minimum_height
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "HDD"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: hdd_input
+                        hint_text: 'HDD'
+                        background_color: 0.91, 0.93, 0.94, 1  # Light Grey
+                        foreground_color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Login"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: login_input
+                        hint_text: 'Login'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Product"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: product_input
+                        hint_text: 'Product'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Message"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: msg_input
+                        hint_text: 'Message'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Company Name"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: coname_input
+                        hint_text: 'Company Name'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "User"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: user_input
+                        hint_text: 'User'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Password"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: pwd_input
+                        hint_text: 'Password'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Expiry Date"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: expirydate_input
+                        hint_text: 'Expiry Date'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "Trade Date"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: trddate_input
+                        hint_text: 'Trade Date'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "API"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: api_input
+                        hint_text: 'API'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(50)
+                    Label:
+                        text: "System Date"
+                        size_hint_x: None
+                        width: dp(100)
+                        color: 0.22, 0.28, 0.31, 1  # Dark Slate
+                    TextInput:
+                        id: sysdate_input
+                        hint_text: 'System Date'
+                        background_color: 0.91, 0.93, 0.94, 1
+                        foreground_color: 0.22, 0.28, 0.31, 1
+                        multiline: False
+                        padding: dp(10)
+                        size_hint_x: 1
+
+        Widget:  # Pushes button to bottom
+            size_hint_y: 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(10)
+            Button:
+                text: 'Save New Entry'
+                font_size: '16sp'
+                background_normal: ''
+                background_color: 0.48, 0.60, 0.58, 1  # Muted Green
+                color: 1, 1, 1, 1
+                on_release: 
+                    app.root.get_screen('add').save_entry()
