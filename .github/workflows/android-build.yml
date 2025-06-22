@@ -44,11 +44,13 @@ jobs:
         $HOME/android-sdk/cmdline-tools/tools/bin/sdkmanager --sdk_root=$HOME/android-sdk \
           "platform-tools" "platforms;android-31" "build-tools;31.0.0"
 
-    - name: Build APK
+    - name: Build APK (includes Git installation again)
       env:
         ANDROID_HOME: $HOME/android-sdk
         PATH: $HOME/android-sdk/cmdline-tools/tools/bin:$HOME/android-sdk/platform-tools:$PATH
-      run: buildozer android debug
+      run: |
+        sudo apt-get install -y git
+        buildozer android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
